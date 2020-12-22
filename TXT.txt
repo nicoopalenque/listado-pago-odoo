@@ -1,0 +1,50 @@
+pip install flask
+pip install -U flask-cors
+
+
+import { Component } from '@angular/core';
+declare let jsPDF;
+
+@Component({
+  selector: 'my-app',
+  template: 
+    `<h1>JSON to PDF app</h1>
+    <div class="container" id="div1">
+        <button id="create" (click)="convert()">Create file</button> 
+    </div>
+    `
+})
+export class AppComponent { 
+  
+  convert(){
+    var item = {
+      "Name" : "Nicolas",
+      "Age" : "24",
+      "Gender" : "Male"
+    };
+    var item2 = {
+      "Name" : "Raquel",
+      "Age" : "21",
+      "Gender" : "Famale"
+    };
+
+    var doc = new jsPDF();
+    var col = ["Name","Age","Gender"];
+    var items = [item, item2];
+    var rows = [];
+    for(var i=0; i<items.length; i++){
+      var temp = [items[i].Name, items[i].Age, items[i].Gender];
+      rows.push(temp);
+    }
+    
+
+    doc.autoTable(col, rows);
+
+    doc.save('Test.pdf');
+  }
+}
+
+
+response xmlrpc
+
+
