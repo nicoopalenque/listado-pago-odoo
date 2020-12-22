@@ -12,13 +12,27 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.2.0",
+    "@angular/cdk": "^10.2.7",
     "@angular/common": "~10.2.0",
     "@angular/compiler": "~10.2.0",
     "@angular/core": "~10.2.0",
     "@angular/forms": "~10.2.0",
+    "@angular/material": "^10.2.7",
     "@angular/platform-browser": "~10.2.0",
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
+    "@ctrl/ngx-csv": "^4.0.0",
+    "@popperjs/core": "^2.6.0",
+    "angular2-csv": "^0.2.9",
+    "angular2-json2csv": "^1.1.2",
+    "bootstrap": "^4.5.3",
+    "csvjson": "^5.1.0",
+    "fs": "0.0.1-security",
+    "jquery": "^3.5.1",
+    "jsonexport": "^3.0.1",
+    "mat-table-exporter": "^9.0.2",
+    "ng-csv": "^0.3.6",
+    "path": "^0.12.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -27,9 +41,9 @@
     "@angular-devkit/build-angular": "~0.1002.0",
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.0",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.19.9",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -41,6 +55,11 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "process": "0.11.10"
+  },
+  "browser": {
+    "fs": false,
+    "json2csv": false
   }
 }

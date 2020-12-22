@@ -1,0 +1,46 @@
+<br>
+<br>
+<div class="container"> 
+    <div align="center" *ngIf="dataSource.length===0">
+        <p><i>Buscando datos</i></p>
+        <mat-spinner></mat-spinner>
+        <p><i>Espere...</i></p>
+    </div>
+    <div *ngIf="dataSource.length>0">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">CUIT</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Moneda</th>
+                <th scope="col">Forma Pago</th>
+                <th scope="col">CBU/ALIAS</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let element of dataSource">
+                <td>{{element.cuit}}</td>
+                <td>{{element.cliente}}</td>
+                <td>{{element.monto | currency}}</td>
+                <td>{{element.moneda}}</td>
+                <td>{{element.formaPago}}</td>
+                <td>{{element.cbuAlias}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div align="right" *ngIf="dataSource.length>0">
+        <!-- <angular2csv class="export" [data]="dataSource" filename="test" [options]="options">
+            <button mat-stroked-button color="primary">Exportar</button>
+        </angular2csv> -->
+        <a csvLink for="csv" [data]="dataSource" [data]="dataSource" delimiter="," [headers]="headers">
+            <button mat-stroked-button color="primary">
+                Exportar
+            </button>
+        </a>
+        <button mat-stroked-button color="primary" (click)="downloadFiles()">
+            Generar Archivo
+        </button>
+    </div>
+</div>

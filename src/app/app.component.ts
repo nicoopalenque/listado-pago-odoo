@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { OdooService } from './shared/services/odoo.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lista-pagos';
+
+  constructor(private odooService: OdooService){}
+
+  ngOnInit(){
+    
+  }
 }
