@@ -33,4 +33,4 @@ def ExportUSD():
     #return json.dumps(exportListUSD,ensure_ascii=False)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=4000)
+    app.run(host = 'localhost',debug=True, port=4000)

@@ -3,7 +3,6 @@ import ssl
 import json
 import xmlrpc.client
 from datetime import date
-
 class PaidList:
     def __init__(self):
         self.username = 'admin' #the user
@@ -22,6 +21,7 @@ class PaidList:
         dataList = []
         list = []
         count = 0
+        print('cantidad de elementos '+ str(len(investment_ids)))
         for investment_id in investment_ids:
             investment_data = sock.execute(self.dbname,self.uid,self.pwd,'crm.investment','read',investment_id,['name','cuit','partner_id', 'currency_id', 'write_date', 're_egreso', 're_egreso_pago', 'cbu'])
             partner_data = sock.execute(self.dbname,self.uid,self.pwd,'res.partner','read',investment_data[0]['partner_id'][0],['name', 'cuit']) 
@@ -37,10 +37,11 @@ class PaidList:
                         if str(investment_data[0]['cbu']).upper() != 'FALSE':
                             dataList[index[0]].cbuARS = str(investment_data[0]['cbu'])
                 else:
-                    if investment_data[0]['currency_id'][1] == 'USD':
-                        dataList[index[0]].availableUSDATM = dataList[index[0]].availableUSDATM + investment_data[0]['re_egreso']
-                    else:
-                        dataList[index[0]].availableARSATM = dataList[index[0]].availableARSATM + investment_data[0]['re_egreso']
+                    if investment_data[0]['re_egreso_pago'] == 'Ventanilla':
+                        if investment_data[0]['currency_id'][1] == 'USD':
+                            dataList[index[0]].availableUSDATM = dataList[index[0]].availableUSDATM + investment_data[0]['re_egreso']
+                        else:
+                            dataList[index[0]].availableARSATM = dataList[index[0]].availableARSATM + investment_data[0]['re_egreso']
             else:
                 data = Data()
                 data.cbuARS = '-'
@@ -48,6 +49,10 @@ class PaidList:
                 data.cuit = partner_data[0]['cuit']
                 data.nombre = partner_data[0]['name']
                 data.partnerId = investment_data[0]['partner_id'][0]
+                data.availableUSDTransfer = 0
+                data.availableARSTransfer = 0
+                data.availableUSDATM = 0
+                data.availableARSATM = 0
                 if investment_data[0]['re_egreso_pago'] == 'Transferencia':
                     if investment_data[0]['currency_id'][0] == 3: #USD
                         data.availableUSDTransfer = data.availableUSDTransfer + investment_data[0]['re_egreso']
@@ -58,10 +63,11 @@ class PaidList:
                         if str(investment_data[0]['cbu']).upper() != 'FALSE':
                             data.cbuARS = str(investment_data[0]['cbu'])
                 else:
-                    if investment_data[0]['currency_id'][0] == 3:
-                        data.availableUSDATM = data.availableUSDATM + investment_data[0]['re_egreso']
-                    else:
-                        data.availableARSATM = data.availableARSATM + investment_data[0]['re_egreso']
+                    if investment_data[0]['re_egreso_pago'] == 'Ventanilla':
+                        if investment_data[0]['currency_id'][0] == 3:
+                            data.availableUSDATM = data.availableUSDATM + investment_data[0]['re_egreso']
+                        else:
+                            data.availableARSATM = data.availableARSATM + investment_data[0]['re_egreso']
                 dataList.append(data)
         for element in dataList:
             row = {

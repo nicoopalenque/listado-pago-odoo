@@ -1,5 +1,5 @@
-pip install flask
-pip install -U flask-cors
+pip3 install flask
+pip3 install -U flask-cors
 
 
 import { Component } from '@angular/core';
